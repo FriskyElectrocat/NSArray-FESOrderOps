@@ -9,11 +9,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/dan/Awesome/FESOrderOps/NSArray+FESOrderOps.m"
-         timestampString = "347666672.761178"
+         timestampString = "347684772.780532"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "50"
-         endingLineNumber = "50"
+         startingLineNumber = "66"
+         endingLineNumber = "66"
          landmarkName = "-fes_halfOrder"
          landmarkType = "5">
       </FileBreakpoint>
@@ -23,11 +23,11 @@
          continueAfterRunningActions = "No"
          isPathRelative = "0"
          filePath = "/Users/dan/Awesome/FESOrderOps/NSArray+FESOrderOps.m"
-         timestampString = "347666672.761178"
+         timestampString = "347684772.780532"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "42"
-         endingLineNumber = "42"
+         startingLineNumber = "58"
+         endingLineNumber = "58"
          landmarkName = "-fes_halfOrder"
          landmarkType = "5">
       </FileBreakpoint>

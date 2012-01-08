@@ -193,6 +193,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Dan Weeks/Frisky Electrocat Studio";
 			};
 			buildConfigurationList = 375A580A14B7E94300CD2476 /* Build configuration list for PBXProject "FESOrderOpsDemo" */;
 			compatibilityVersion = "Xcode 3.2";
