@@ -27,7 +27,12 @@
 
 @implementation ViewController
 
-@synthesize theLabel;
+@synthesize orderLabel = _orderLabel;
+@synthesize listSource = _listSource;
+@synthesize origList = _origList;
+@synthesize tableView = _tableView;
+@synthesize currentOrderIndex = _currentOrderIndex;
+@synthesize orderList = _orderList;
 
 - (void)didReceiveMemoryWarning
 {
@@ -41,9 +46,17 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    NSArray *newArray = [NSArray arrayWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", nil];
-    NSArray *shuffledArray = [newArray fes_shuffle];
-    theLabel.text = [NSString stringWithFormat:@"%@", shuffledArray];
+    _currentOrderIndex = [NSNumber numberWithInteger:0];
+    _orderList = [NSArray arrayWithObjects:@"None", @"Shuffle", @"Half Order", @"Dice", @"Roll 2^2", @"Roll 2^3", @"Roll (default 2^5)", nil];
+    NSMutableArray *tempArray = [[NSMutableArray alloc] initWithCapacity:100];
+    for (int i = 0; i < 100; i++) {
+        [tempArray addObject:[NSString stringWithFormat:@"%d", i]];
+    }
+    _origList = [NSArray arrayWithArray:tempArray];
+    _listSource = [[self origList] copy];
+    _orderLabel.text = [NSString stringWithFormat:@"%@", [[self orderList] objectAtIndex:[self.currentOrderIndex integerValue]]];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
 }
 
 - (void)viewDidUnload
@@ -77,6 +90,68 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+#pragma mark -
+#pragma mark Table View Data Source Methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.listSource count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *CellIdentifier = @"orderListCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    }
+    
+    NSUInteger row = [indexPath row];
+    cell.textLabel.text = [[self listSource] objectAtIndex:row];
+    return cell;
+    
+}
+
+# pragma mark -
+
+- (IBAction)nextOrder:(id)sender 
+{
+    if ([[self currentOrderIndex] integerValue] == [[self orderList] count] - 1) {
+        _currentOrderIndex = 0;
+    } else {
+        _currentOrderIndex = [NSNumber numberWithInteger:[[self currentOrderIndex] integerValue] + 1];
+    }
+
+    switch ([[self currentOrderIndex] integerValue]) {
+        case 1: // Shuffle
+            _listSource = [[self origList] fes_shuffle];
+            break;
+        case 2:
+            _listSource = [[self origList] fes_halfOrder];
+            break;
+        case 3:
+            _listSource = [[self origList] fes_dice];
+            break;
+        case 4:
+            _listSource = [[self origList] fes_rollWithPowerOfTwo:2];
+            break;
+        case 5:
+            _listSource = [[self origList] fes_rollWithPowerOfTwo:3];
+            break;
+        case 6:
+            _listSource = [[self origList] fes_roll];
+            break;
+        case 0:
+        default:
+            _listSource = [[self origList] copy];
+            break;
+    }
+    _orderLabel.text = [[self orderList] objectAtIndex:[[self currentOrderIndex] integerValue]];
+
+    [[self tableView] reloadData];
 }
 
 @end

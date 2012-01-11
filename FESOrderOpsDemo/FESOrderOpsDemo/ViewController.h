@@ -27,8 +27,15 @@
 
 #import "NSArray+FESOrderOps.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property(nonatomic, strong) IBOutlet UILabel *theLabel;
+@property(nonatomic, strong) IBOutlet UILabel *orderLabel;
+@property(nonatomic, strong) NSArray *listSource;
+@property(nonatomic, strong) NSArray *origList;
+@property(nonatomic, strong) IBOutlet UITableView *tableView;
+@property(nonatomic, strong) NSNumber *currentOrderIndex;
+@property(nonatomic, strong) NSArray *orderList;
+
+- (IBAction)nextOrder:(id)sender;
 
 @end
