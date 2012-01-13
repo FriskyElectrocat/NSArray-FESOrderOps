@@ -26,11 +26,11 @@ The category adds the following to NSArray:
     
 ### fes_shuffle:
 
-A basic Fisher-Yates Shuffle using the `arc4random_uniform(3)` function
-for psuedorandom values. Returns a new NSArray with the new order. While not
-strictly putting an array in a known order this is included for completeness
-incase the user does want to shuffle, say for a deck of cards.
-See [wikipedia](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle) for more information.
+A basic [Fisher-Yates Shuffle](http://en.wikipedia.org/wiki/Fisher–Yates_shuffle) 
+using the `arc4random_uniform(3)` function for psuedorandom values. Returns a new 
+NSArray with the new order. While not strictly putting an array in a known order 
+this is included for completeness in case the user does want to shuffle, say for a 
+deck of cards.
 
 ### fes_halfOrder:
 
